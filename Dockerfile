@@ -1,4 +1,4 @@
-FROM adoptopenjdk:11-jdk-hotspot  # Replace this with the desired Java version if needed
+FROM openjdk:11
 
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
