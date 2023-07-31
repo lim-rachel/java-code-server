@@ -1,0 +1,26 @@
+name: Build and Publish Docker Image
+on:
+  push:
+    branches:
+      - main  # Replace with the branch you want to trigger the build on
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .  # Replace with the path to your Dockerfile if needed
+          push: true
+          tags: ghcr.io/lim-rachel/java-code-server:latest
